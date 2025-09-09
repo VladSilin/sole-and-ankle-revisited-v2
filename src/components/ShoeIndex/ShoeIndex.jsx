@@ -9,22 +9,25 @@ import Spacer from "../Spacer";
 import ShoeSidebar from "../ShoeSidebar";
 import ShoeGrid from "../ShoeGrid";
 
+const Crumbs = () => (
+  <Breadcrumbs>
+    <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+    <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+    <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+  </Breadcrumbs>
+);
+
 const ShoeIndex = ({ sortId, setSortId }) => {
-  const Crumbs = () => (
-    <Breadcrumbs>
-      <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-      <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-      <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
-    </Breadcrumbs>
-  );
   return (
     <Wrapper>
       <MainColumn>
-        <HeaderCrumbs>
-          <Crumbs />
-        </HeaderCrumbs>
         <Header>
-          <Title>Running</Title>
+          <div>
+            <MobileCrumbs>
+              <Crumbs />
+            </MobileCrumbs>
+            <Title>Running</Title>
+          </div>
           <SelectWrapper>
             <Select
               label="Sort"
@@ -55,7 +58,7 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
-const HeaderCrumbs = styled.div`
+const MobileCrumbs = styled.div`
   display: none;
 
   ${QUERIES.tabletAndDown} {
@@ -85,6 +88,10 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+
+  ${QUERIES.tabletAndDown} {
+    align-items: flex-end;
+  }
 `;
 
 const Title = styled.h2`

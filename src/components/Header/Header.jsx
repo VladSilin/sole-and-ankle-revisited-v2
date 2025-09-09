@@ -8,6 +8,8 @@ import SuperHeader from "../SuperHeader";
 import MobileMenu from "../MobileMenu";
 
 import Icon from "../Icon";
+import UnstyledButton from "../UnstyledButton";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -22,24 +24,32 @@ const Header = () => {
       <SuperHeaderWrapper>
         <SuperHeader />
       </SuperHeaderWrapper>
-      <DecorativeLine />
       <MainHeader>
         <Side>
           <Logo />
         </Side>
-        <Nav>
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <MovileNav>
-          <Icon id={"shopping-bag"} />
-          <Icon id={"search"} />
-          <Icon id={"menu"} />
-        </MovileNav>
+        </DesktopNav>
+        <MobileActions>
+          <UnstyledButton>
+            <Icon id={"shopping-bag"} />
+            <VisuallyHidden>Open cart</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
+            <Icon id={"search"} />
+            <VisuallyHidden>Search</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
+            <Icon id={"menu"} />
+            <VisuallyHidden>Open menu</VisuallyHidden>
+          </UnstyledButton>
+        </MobileActions>
         <Side />
       </MainHeader>
 
@@ -55,12 +65,12 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
 
   overflow-x: auto;
 
   ${QUERIES.tabletAndDown} {
+    border-top: 4px solid ${COLORS.gray[900]};
     align-items: center;
   }
 `;
@@ -71,16 +81,9 @@ const SuperHeaderWrapper = styled.div`
   }
 `;
 
-const DecorativeLine = styled.div`
-  ${QUERIES.tabletAndDown} {
-    background-color: ${COLORS.gray[900]};
-    height: 4px;
-  }
-`;
-
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
-  gap: clamp(16px, 20px + 3vw, 48px);
+  gap: clamp(1rem, 9.2vw - 4.5rem, 3.5rem);
   margin: 0px 48px;
 
   ${QUERIES.tabletAndDown} {
@@ -88,7 +91,7 @@ const Nav = styled.nav`
   }
 `;
 
-const MovileNav = styled.nav`
+const MobileActions = styled.nav`
   display: none;
 
   ${QUERIES.tabletAndDown} {
