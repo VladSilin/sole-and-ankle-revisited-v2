@@ -1,10 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { Dialog } from "@radix-ui/react-dialog";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
+import { COLORS, WEIGHTS, QUERIES } from "../../constants";
+import Logo from "../Logo";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+
+import Icon from "../Icon";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -16,7 +19,10 @@ const Header = () => {
 
   return (
     <header>
-      <SuperHeader />
+      <SuperHeaderWrapper>
+        <SuperHeader />
+      </SuperHeaderWrapper>
+      <DecorativeLine />
       <MainHeader>
         <Side>
           <Logo />
@@ -29,6 +35,11 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
+        <MovileNav>
+          <Icon id={"shopping-bag"} />
+          <Icon id={"search"} />
+          <Icon id={"menu"} />
+        </MovileNav>
         <Side />
       </MainHeader>
 
@@ -46,16 +57,55 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  overflow-x: auto;
+
+  ${QUERIES.tabletAndDown} {
+    align-items: center;
+  }
+`;
+
+const SuperHeaderWrapper = styled.div`
+  ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
+
+const DecorativeLine = styled.div`
+  ${QUERIES.tabletAndDown} {
+    background-color: ${COLORS.gray[900]};
+    height: 4px;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(16px, 20px + 3vw, 48px);
   margin: 0px 48px;
+
+  ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
+
+const MovileNav = styled.nav`
+  display: none;
+
+  ${QUERIES.tabletAndDown} {
+    display: flex;
+    gap: 4vw;
+    margin-left: auto;
+    align-items: center;
+  }
 `;
 
 const Side = styled.div`
   flex: 1;
+
+  ${QUERIES.tabletAndDown} {
+    flex-grow: 0;
+    flex-shrink: 1;
+  }
 `;
 
 const NavLink = styled.a`
